@@ -21,9 +21,9 @@ deploy-prod:
     - apt-get -y install rsync
   script:
     - >- 
-      ssh -i ~/.ssh/ssh-key.pem ubuntu@$EC2_ADDRESS \
-      'git config --global --replace-all user.name "Full Name"
-      && git config --global --replace-all user.email "email@email.com"
+      ssh -i ~/.ssh/ssh-key.pem root@$EC2_ADDRESS \
+      'git config --global --replace-all user.name "vijay-ravi"
+      && git config --global --replace-all user.email "vijayravi187@gmail.com"
       '
     - >-
       ssh -i ~/.ssh/ssh-key.pem ubuntu@$EC2_ADDRESS \
