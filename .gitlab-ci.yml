@@ -13,15 +13,15 @@ deploy-prod:
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
     - cat $SSH_KEY_EC2
-    - echo "$(cat $SSH_KEY_EC2)" >> ~/.ssh/ssh-key.pem
-    - chmod 400 ~/.ssh/ssh-key.pem
-    - cat ~/.ssh/ssh-key.pem
+    - echo "$(cat $SSH_KEY_EC2)" >> ~/.ssh/id_rsa
+    - chmod 400 ~/.ssh/id_rsa
+    - cat ~/.ssh/id_rsa
     - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
     - apt-get update -y
     - apt-get -y install rsync
   script:
     - >- 
-      ssh -i ~/.ssh/ssh-key.pem root@$EC2_ADDRESS \
+      ssh -i ~/.ssh/id_rsa root@$EC2_ADDRESS \
       'git config --global --replace-all user.name "vijay-ravi"
       && git config --global --replace-all user.email "vijayravi187@gmail.com"
       '
