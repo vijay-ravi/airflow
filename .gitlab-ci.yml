@@ -12,10 +12,8 @@ deploy-prod:
     - eval $(ssh-agent -s)
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
-    - cat $SSH_KEY_EC2
     - echo "$(cat $SSH_KEY_EC2)" >> ~/.ssh/id_rsa
     - chmod 400 ~/.ssh/id_rsa
-    - cat ~/.ssh/id_rsa
     - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
     - apt-get update -y
     - apt-get -y install rsync
@@ -26,7 +24,7 @@ deploy-prod:
       && git config --global --replace-all user.email "vijayravi187@gmail.com"
       '
     - >-
-      ssh -i ~/.ssh/ssh-key.pem ubuntu@$EC2_ADDRESS \
+      ssh -i ~/.ssh/ssh-key.pem root@$EC2_ADDRESS \
       '
       if [ -d airflow-pipeline ]; 
       then cd airflow-pipeline
