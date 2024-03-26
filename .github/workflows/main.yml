@@ -5,26 +5,6 @@ on:
   - delete
 
 jobs:
-  build-and-configure-airflow:
-    needs: sync
-    runs-on: ubuntu-latest
-    name: Build and Configure Airflow Docker Image
-    steps:
-    - uses: actions/checkout@v2
-    - name: Build the Docker image
-      run: |
-        docker build . --file Dockerfile --tag spaceflow:2.1.2
-    - name: Update .env file
-      run: |
-        echo "AIRFLOW_IMAGE_NAME=spaceflow:2.1.2" >> .env
-    - name: Commit and Push .env Changes
-      run: |
-        git config --global user.email "vijayravi187@gmail.com"
-        git config --global user.name "vijay-ravi"
-        git add .env
-        git commit -m "Update .env with AIRFLOW_IMAGE_NAME"
-        git push
-        
   sync:
     runs-on: ubuntu-latest
     name: Git Repo Sync
