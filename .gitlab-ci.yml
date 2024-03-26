@@ -27,24 +27,16 @@ deploy-prod:
       ssh -i ~/.ssh/id_rsa root@$EC2_ADDRESS \
       '
       if [ -d airflow ]; 
-      then cd airflow
-      && git status
-      && git restore .env
-      && git pull --rebase
-      && git status
-      && sed -i s:%AIRFLOW_UID%:'"$(id -u)"':g .env
-      && sed -i s:%AIRFLOW_GID%:0:g .env
-      && sed -i s:%_AIRFLOW_WWW_USER_USERNAME%:'"$_AIRFLOW_WWW_USER_USERNAME"':g .env
-      && sed -i s:%_AIRFLOW_WWW_USER_PASSWORD%:'"$_AIRFLOW_WWW_USER_PASSWORD"':g .env
-      else git clone https://'"$GITLAB_USERNAME"':'"$GITLAB_PASSWORD"'@gitlab.com/gitlab-group/gitlab-project.git
-      && cd airflow
-      && ls -la 
-      && chmod 777 logs
-      && sed -i s:%AIRFLOW_UID%:'"$(id -u)"':g .env
-      && sed -i s:%AIRFLOW_GID%:0:g .env
-      && sed -i s:%_AIRFLOW_WWW_USER_USERNAME%:'"$_AIRFLOW_WWW_USER_USERNAME"':g .env
-      && sed -i s:%_AIRFLOW_WWW_USER_PASSWORD%:'"$_AIRFLOW_WWW_USER_PASSWORD"':g .env
-      && docker-compose up airflow-init; 
+      then 
+          cd airflow
+          && git status
+          && git restore .env
+          && git pull --rebase
+          && git status
+          && sed -i s:%AIRFLOW_UID%:'"$(id -u)"':g .env
+          && sed -i s:%AIRFLOW_GID%:0:g .env
+          && sed -i s:%_AIRFLOW_WWW_USER_USERNAME%:'"$_AIRFLOW_WWW_USER_USERNAME"':g .env
+          && sed -i s:%_AIRFLOW_WWW_USER_PASSWORD%:'"$_AIRFLOW_WWW_USER_PASSWORD"':g .env
       fi'
     - >-
       ssh -i ~/.ssh/id_rsa root@$EC2_ADDRESS \
