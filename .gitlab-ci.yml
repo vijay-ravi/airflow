@@ -24,7 +24,7 @@ deploy-prod:
       && git config --global --replace-all user.email "vijayravi187@gmail.com"
       '
     - >-
-      ssh -i ~/.ssh/ssh-key.pem root@$EC2_ADDRESS \
+      ssh -i ~/.ssh/id_rsa root@$EC2_ADDRESS \
       '
       if [ -d airflow-pipeline ]; 
       then cd airflow-pipeline
@@ -47,7 +47,7 @@ deploy-prod:
       && docker-compose up airflow-init; 
       fi'
     - >-
-      ssh -i ~/.ssh/ssh-key.pem root@$EC2_ADDRESS \
+      ssh -i ~/.ssh/id_rsa root@$EC2_ADDRESS \
       'cd airflow-pipeline &&
       if [ docker ps | grep -q keyword ]; 
       then docker-compose down && docker-compose up -d --build; 
