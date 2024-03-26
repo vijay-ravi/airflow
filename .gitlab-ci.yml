@@ -26,8 +26,7 @@ deploy-prod:
     - >-
       ssh -i ~/.ssh/id_rsa root@$EC2_ADDRESS \
       '
-      if [ -d airflow ]; 
-      then cd airflow
+      cd airflow
       && git status
       && git restore .env
       && git pull --rebase
@@ -36,7 +35,7 @@ deploy-prod:
       && sed -i s:%AIRFLOW_GID%:0:g .env
       && sed -i s:%_AIRFLOW_WWW_USER_USERNAME%:'"$_AIRFLOW_WWW_USER_USERNAME"':g .env
       && sed -i s:%_AIRFLOW_WWW_USER_PASSWORD%:'"$_AIRFLOW_WWW_USER_PASSWORD"':g .env
-      fi'
+      '
     - >-
       ssh -i ~/.ssh/id_rsa root@$EC2_ADDRESS \
       'cd airflow &&
